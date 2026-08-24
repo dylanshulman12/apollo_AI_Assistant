@@ -1,0 +1,9 @@
+[38;2;96;165;250m=== Loading models! ===[0m
+[38;2;74;222;128m=== Models Loaded ===[0m
+[38;2;96;165;250mTotal time: 4.000272 seconds![0m
+user: Example message
+AI:  ANSWER
+AI:  ANSWER
+AI:  ANSWER
+AI:  ANSWER
+AI:  ANSWER

@@ -1,0 +1,10 @@
+services:
+  - name: "messenger"
+    config:
+      api_endpoint: "http://localhost:8080"
+      access_token: "token"
+       
+  - name: "pdf_analyzer"
+    config:
+      deck_directory: "./documents"
+  

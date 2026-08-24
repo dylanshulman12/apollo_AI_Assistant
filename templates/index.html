@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My AI</title>
+</head>
+
+<body>
+
+    <h1>AI Chat</h1>
+
+    <div id="chat">
+        <!-- Messages will go here -->
+    </div>
+        
+    <input type="text" name="message" id="message"/>
+    <input type="submit" value="Submit" id="submit"/>
+
+
+    </form>
+
+
+
+    <script>
+        // Create WebSocket connection.
+        const socket = new WebSocket("ws://localhost:5000/ws");
+        const message = document.getElementById("message");
+        const send = document.getElementById("submit");
+
+        
+        const chat = document.getElementById("chat");
+
+        // Connection opened
+        socket.addEventListener("open", (event) => {
+        });
+
+       let currentAIElement = null;
+
+        socket.addEventListener("message", (event) => {
+        console.log("Message from server ", event.data);
+
+        // If this is the first chunk of a new response
+        if (!currentAIElement) {
+            console.log("in here!")
+            // Create one paragraph
+            currentAIElement = document.createElement("p");
+            currentAIElement.textContent = "AI: ";
+            chat.appendChild(currentAIElement); 
+        }
+
+        // Append the chunk to the existing paragraph
+        currentAIElement.textContent += event.data;
+        })
+
+        send.addEventListener("click", () => {
+
+            const text = message.value;
+
+            if (text === "") {
+                return;
+            }
+
+            socket.send(text);
+
+            const userElement = document.createElement("p");
+
+            userElement.textContent = "You: " + text;
+
+            chat.appendChild(userElement);
+
+            message.value = "";
+            currentAIElement = null;
+            console.log(currentAIElement)
+
+        });
+
+        
+        
+
+        
+
+    </script>
+
+</body>
+</html>
